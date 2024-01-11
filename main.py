@@ -1,11 +1,12 @@
 from flask import (
     Flask,
-    request
+    request,
+    render_template
 )
 import pandas as pd
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="template")
 
 
 @app.route("/", methods=['POST', 'GET'])
@@ -17,6 +18,22 @@ def index():
     save_to_csv(ipadr, agent)
 
     return f'ip: {ipadr}\nuser-agent: {agent}'
+
+
+@app.route("/admincat", methods=['POST', 'GET'])
+def adminpan():
+    if request.method == 'POST':
+        name= request.form.get('name')
+        password = request.form.get('password')
+        if name == "test" and password == "admin":
+
+            dfw = pd.read_csv("your_file.csv")
+            return str(dfw)
+
+        return 'error'
+
+
+    return render_template('login.html')
 
 
 def save_to_csv(ip, user_agent, file_path='your_file.csv'):
@@ -35,6 +52,7 @@ def save_to_csv(ip, user_agent, file_path='your_file.csv'):
     df.to_csv(file_path, index=False)
     print("ok")
     return 0
+
 
 
 if __name__ == '__main__':
