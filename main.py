@@ -36,6 +36,11 @@ def adminpan():
     return render_template('login.html')
 
 
+@app.route("/report", methods=['POST', 'GET'])
+def report():
+    return 0
+
+
 def save_to_csv(ip, user_agent, file_path='your_file.csv'):
     # Пытаемся загрузить существующий файл в DataFrame
     try:
