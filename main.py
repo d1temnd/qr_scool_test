@@ -17,7 +17,8 @@ def index():
 
     save_to_csv(ipadr, agent)
 
-    return f'ip: {ipadr}\nuser-agent: {agent}'
+    return render_template("index.html")
+    # return f'ip: {ipadr}\nuser-agent: {agent}'
 
 
 @app.route("/admincat", methods=['POST', 'GET'])
