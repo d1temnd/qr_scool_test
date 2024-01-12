@@ -41,6 +41,11 @@ def adminpan():
 def report():
     return 0
 
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template("404.html"), 404
+
+
 
 def save_to_csv(ip, user_agent, file_path='your_file.csv'):
     # Пытаемся загрузить существующий файл в DataFrame
